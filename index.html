@@ -1,179 +1,205 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reproductor Vinilo</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reproductor Vinilo</title>
+  <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    background: #f8f9fb;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-.container {
-    width: 900px;
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
-    display: flex;
-    padding: 20px;
-}
-
-/* Vinilo */
-.vinyl {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.disc {
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #111 60%, #000 100%);
-    position: relative;
-    animation: spin 6s linear infinite;
-    transition: background 0.5s ease; /* transición suave al cambiar color */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
 
-/* surcos del vinilo */
-.disc::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: repeating-radial-gradient(
-    circle,
-    rgba(255,255,255,0.05) 0px,
-    rgba(255,255,255,0.05) 2px,
-    transparent 3px,
-    transparent 6px
-    );
+    body {
+      background: #f8f9fb;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 15px;
     }
 
-/* Etiqueta central */
-.label {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #333;
-    font-weight: bold;
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
+      display: flex;
+      flex-wrap: wrap; /* clave: se acomoda en columnas en pantallas pequeñas */
+      padding: 20px;
+      gap: 20px;
     }
 
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    /* Vinilo */
+    .vinyl {
+      flex: 1;
+      min-width: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
-/* Botón play */
-.controls {
-    margin-top: 20px;
+    .disc {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #111 60%, #000 100%);
+      position: relative;
+      animation: spin 6s linear infinite;
+      transition: background 0.5s ease;
     }
 
-.controls button {
-    background: #9dbcd4;
-    border: none;
-    border-radius: 12px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 18px;
-    color: white;
-    transition: 0.3s;
+    .disc::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: repeating-radial-gradient(
+        circle,
+        rgba(255,255,255,0.05) 0px,
+        rgba(255,255,255,0.05) 2px,
+        transparent 3px,
+        transparent 6px
+      );
     }
 
-.controls button:hover {
-    background: #7aa2bd;
-}
+    .label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      font-weight: bold;
+      font-size: 14px;
+    }
 
-/* Info canción */
-.info {
-    margin-top: 20px;
-    text-align: center;
-}
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
 
-.info h2 {
-    font-size: 24px;
-    color: #4a6fa5;
-}
+    .controls {
+      margin-top: 15px;
+    }
 
-/* Playlist */
-.playlist {
-    flex: 1;
-    padding-left: 30px;
-}
+    .controls button {
+      background: #9dbcd4;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      color: white;
+      transition: 0.3s;
+    }
 
-.playlist h3 {
-    margin-bottom: 15px;
-    font-size: 22px;
-    color: #4a6fa5;
-}
+    .controls button:hover {
+      background: #7aa2bd;
+    }
 
-.song {
-    display: flex;
-    align-items: center;
-    background: #f1f1f1;
-    padding: 10px;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-}
+    .info {
+      margin-top: 15px;
+      text-align: center;
+    }
 
-.song img {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    margin-right: 10px;
-}
+    .info h2 {
+      font-size: 20px;
+      color: #4a6fa5;
+    }
 
-.song:hover {
-    background: #dce9f3;
-}
+    /* Playlist */
+    .playlist {
+      flex: 1;
+      min-width: 220px;
+    }
 
-</style>
+    .playlist h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #4a6fa5;
+      text-align: center;
+    }
+
+    .song {
+      display: flex;
+      align-items: center;
+      background: #f1f1f1;
+      padding: 10px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .song img {
+      width: 35px;
+      height: 35px;
+      border-radius: 8px;
+      margin-right: 10px;
+    }
+
+    .song:hover {
+      background: #dce9f3;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .playlist {
+        width: 100%;
+      }
+
+      .disc {
+        width: 180px;
+        height: 180px;
+      }
+
+      .label {
+        width: 60px;
+        height: 60px;
+        font-size: 12px;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
+  <div class="container">
     <!-- Vinilo -->
     <div class="vinyl">
-    <div class="disc" id="disc">
+      <div class="disc" id="disc">
         <div class="label">LP</div>
-    </div>
-    <div class="controls">
+      </div>
+      <div class="controls">
         <button id="playBtn">▶ Reproducir</button>
-    </div>
-    <div class="info">
+      </div>
+      <div class="info">
         <h2 id="songTitle">Selecciona una canción</h2>
         <p id="songArtist"></p>
-    </div>
+      </div>
     </div>
 
     <!-- Playlist -->
     <div class="playlist">
-    <h3>Playlist</h3>
+      <h3>Playlist</h3>
     <div class="song" onclick="playSong('Sleep Talking - Indigo De Souza','Sleep Talking - Indigo De Souza.mp3')">
         <img src="https://via.placeholder.com/40" alt="">
         <span>Sleep Talking</span>
@@ -187,12 +213,12 @@ body {
         <span>宝贝在干嘛 歌词</span>
     </div>
     </div>
-</div>
+  </div>
 
-<!-- Reproductor oculto -->
-<audio id="audioPlayer"></audio>
+  <!-- Reproductor -->
+  <audio id="audioPlayer"></audio>
 
-<script>
+  <script>
     const disc = document.getElementById("disc");
     const playBtn = document.getElementById("playBtn");
     const songTitle = document.getElementById("songTitle");
@@ -202,42 +228,38 @@ body {
     let isPlaying = false;
 
     playBtn.addEventListener("click", () => {
-    if (isPlaying) {
+      if (isPlaying) {
         audioPlayer.pause();
         disc.style.animationPlayState = "paused";
         playBtn.textContent = "▶ Reproducir";
-    } else {
+      } else {
         audioPlayer.play();
         disc.style.animationPlayState = "running";
         playBtn.textContent = "⏸ Pausa";
-    }
-    isPlaying = !isPlaying;
+      }
+      isPlaying = !isPlaying;
     });
 
     function playSong(title, file) {
-    songTitle.textContent = title.split(" - ")[0];
-    songArtist.textContent = title.split(" - ")[1] || "";
+      songTitle.textContent = title.split(" - ")[0];
+      songArtist.textContent = title.split(" - ")[1] || "";
 
-      // Cargar y reproducir canción
-    audioPlayer.src = file;
-    audioPlayer.play();
-    isPlaying = true;
+      audioPlayer.src = file;
+      audioPlayer.play();
+      isPlaying = true;
 
-      // Girar vinilo y cambiar botón
-    disc.style.animationPlayState = "running";
-    playBtn.textContent = "⏸ Pausa";
+      disc.style.animationPlayState = "running";
+      playBtn.textContent = "⏸ Pausa";
 
-      // Cambiar color del vinilo aleatoriamente
-    const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
-    disc.style.background = `radial-gradient(circle, ${randomColor} 60%, #000 100%)`;
+      const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+      disc.style.background = `radial-gradient(circle, ${randomColor} 60%, #000 100%)`;
     }
 
-    // Si la canción termina, detener vinilo
     audioPlayer.addEventListener("ended", () => {
-        disc.style.animationPlayState = "paused";
-        playBtn.textContent = "▶ Reproducir";
-        isPlaying = false;
+      disc.style.animationPlayState = "paused";
+      playBtn.textContent = "▶ Reproducir";
+      isPlaying = false;
     });
-</script>
+  </script>
 </body>
 </html>
